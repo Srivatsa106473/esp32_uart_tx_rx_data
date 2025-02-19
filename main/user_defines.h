@@ -1,0 +1,31 @@
+#define UART_NUM UART_NUM_2
+#define DATA_BITS UART_DATA_8_BITS
+#define PARITY_MODE UART_PARITY_DISABLE
+#define STOP_BITS UART_STOP_BITS_1
+#define  UART_MODE UART_MODE_UART
+
+
+
+#define GPIO_TX GPIO_NUM_17
+#define GPIO_RX GPIO_NUM_16
+// #define GPIO_RTS 
+// #define GPIO_CTS 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
