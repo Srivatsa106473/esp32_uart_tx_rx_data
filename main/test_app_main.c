@@ -17,6 +17,7 @@
 const int uart_buffer_size = (1024*2);
 QueueHandle_t uart_queue;
 uint8_t data[128];
+const char* expected_data = "test break";
 
 void setting_communication_parameters()
 {
@@ -65,24 +66,19 @@ void read_rx_buffer()
     // ESP_ERROR_CHECK(uart_get_buffered_data_len(UART_NUM, (size_t*)&length));
     int length = uart_read_bytes(UART_NUM, data, sizeof(data), 100);
     data[length]='\0';
-    printf( "%s",data);
+    printf("sending data: %s\n",data);
 }
-
 
 void unity_run_menu()
 {
-    const char* expected_data = "test break";
     write_Tx_buffer();
-    vTaskDelay(1000/portTICK_PERIOD_MS);
+    vTaskDelay(100/portTICK_PERIOD_MS);
     read_rx_buffer();
-    vTaskDelay(500/portTICK_PERIOD_MS);
-    TEST_ASSERT_EQUAL_STRING(expected_data,(char*) data);
-    printf("expected data is : %s",expected_data);
-    // printf("sent data is :%s",data);
+    vTaskDelay(100/portTICK_PERIOD_MS);
+    TEST_ASSERT_EQUAL_STRING((char*)expected_data,(char*) data);
+    printf("expected data is : %s and sent data is :%s\n",expected_data,data);
+    fflush(stdout);
 }
-
-
-
 
 void app_main(void)
 {
